@@ -1,0 +1,76 @@
+// creation tables //
+create table SOFTWARE(
+    NO_SOFT  NUMBER(5) CONSTRAINT pfnosoft PRIMARY KEY,
+    SOFTWARE VARCHAR2(50),
+    EDITOR   VARCHAR2(50),
+    VERSION  VARCHAR2(5),
+    TYPE_OS  VARCHAR2(20) CHECK (TYPE_OS IN ('MAC', 'WIN', 'LIX')) ,
+    EXPIRED  DATE,
+    PURCHASE DATE
+);
+create table INSTALL(
+    NO_SOFT      NUMBER(5) CONSTRAINT fknosoft REFERENCES SOFTWARE(NO_SOFT),
+    NO_HOST      NUMBER(5),
+    DATE_INSTALL DATE
+);
+create table SALLE(
+    no_salle  NUMBER(5),
+    sallename VARCHAR2(50),
+    nb_poste  NUMBER(6)
+);
+create table HOSTNAME(
+    no_host  NUMBER(5),
+    no_salle NUMBER(5),
+    osystem  VARCHAR2(20),
+    ip       VARCHAR2(16)
+);
+
+
+-----------------------------------------
+
+poste varchar2(20):='        ';
+                                  ;
+G_          ;
+G_   number;
+begin
+select sallename into install from salle where no_salle_install;
+select count(*) into G_   from hostname where no_salle_   and      ;
+select count(*) into G_    from install i join hostname h on i.id_      where h.syste =     and     ;
+dbms_output.put_line('salle = '||     );
+dbms_output.put_line('type poste='||poste);
+dbms_output.put_line('G   ='||   );
+dbms_output.put_line('G_    ='||   );
+dbms_output.put_line('G_   ='||        );
+
+end;
+/
+
+
+
+
+
+
+
+
+
+
+------------EX1
+set serveroutput on
+declare 
+nsalle SALLE.NO_SALLE%type:=&nsalle;
+posteType HOSTNAME.OSYSTEM%type:=&posteType;
+CURSOR c is select 
+begin
+open c;
+loop
+fetch curseur into  salle_name, n_host, soft_name, d_install;
+exit when curseur%notfound;
+DBMS_OUTPUT.PUT_LINE( '---------Derniere instalation effectuee----------');
+DBMS_OUTPUT.PUT_LINE('salle = '|| salle_name );
+DBMS_OUTPUT.PUT_LINE('poste = '|| salle_name ||'_'||n_host);
+DBMS_OUTPUT.PUT_LINE('logiciel = '||soft_name );
+DBMS_OUTPUT.PUT_LINE('date installation = '||d_install);
+end loop;
+close curseur;
+end;
+
